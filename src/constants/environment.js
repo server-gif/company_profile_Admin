@@ -24,13 +24,11 @@ const resolveApiBaseUrl = () =>
 // base URL, not the admin origin which has no /blog/:slug route. In local dev
 // the public site is served on the FE dev port (5173); on Vercel set
 // VITE_PUBLIC_SITE_URL to the deployed public site origin.
-const configuredPublicSiteUrl = readEnvironmentValue(
-  "VITE_PUBLIC_SITE_URL",
-  "",
-).replace(/\/$/, "");
+const PRODUCTION_PUBLIC_SITE_URL =
+  readEnvironmentValue("VITE_PUBLIC_SITE_URL", "").replace(/\/$/, "");
 
 const resolvePublicSiteUrl = () =>
-  configuredPublicSiteUrl ||
+  PRODUCTION_PUBLIC_SITE_URL ||
   (import.meta.env.PROD ? "" : "http://localhost:5173");
 
 export const ENVIRONMENT = Object.freeze({
